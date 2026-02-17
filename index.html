@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Love Investment Test - How Much Does He Like You?</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <!-- 首页 -->
+        <section id="home" class="page active">
+            <div class="hero">
+                <div class="heart-icon">💝</div>
+                <h1>How Much Does He<br><span class="highlight">Really</span> Like You?</h1>
+                <p class="subtitle">Discover his true feelings in 2 minutes</p>
+                
+                <div class="stats">
+                    <div class="stat">
+                        <span class="stat-number">2M+</span>
+                        <span class="stat-label">Tests Taken</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">98%</span>
+                        <span class="stat-label">Accuracy</span>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="btn-primary" onclick="showPage('stage')">
+                Start Test
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </button>
+            
+            <p class="trust-text">🔒 Private &amp; Anonymous • Takes 2 min</p>
+        </section>
+
+        <!-- 选择阶段 -->
+        <section id="stage" class="page">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 10%"></div>
+            </div>
+            
+            <div class="question-container">
+                <span class="step">Step 1 of 9</span>
+                <h2>What's your current relationship stage?</h2>
+                <p class="question-sub">This helps us tailor the most accurate assessment for you.</p>
+                
+                <div class="options stage-options">
+                    <button class="option-card" onclick="selectStage('friend')">
+                        <span class="option-icon">🤝</span>
+                        <span class="option-title">Friend Zone</span>
+                        <span class="option-desc">We're friends, but I want more</span>
+                    </button>
+                    
+                    <button class="option-card" onclick="selectStage('dating')">
+                        <span class="option-icon">💕</span>
+                        <span class="option-title">Dating</span>
+                        <span class="option-desc">We're seeing each other casually</span>
+                    </button>
+                    
+                    <button class="option-card" onclick="selectStage('exclusive')">
+                        <span class="option-icon">💑</span>
+                        <span class="option-title">Exclusive</span>
+                        <span class="option-desc">We're officially together</span>
+                    </button>
+                    
+                    <button class="option-card" onclick="selectStage('commitment')">
+                        <span class="option-icon">💍</span>
+                        <span class="option-title">Commitment</span>
+                        <span class="option-desc">We're serious/long-term</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 测试题目 -->
+        <section id="quiz" class="page">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            
+            <div class="question-container">
+                <span class="step" id="stepText">Step 2 of 9</span>
+                
+                <h2 id="questionText">Loading...</h2>
+                
+                <div class="options" id="optionsContainer">
+                    <!-- 动态生成选项 -->
+                </div>
+            </div>
+            
+            <button class="btn-back" onclick="prevQuestion()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </button>
+        </section>
+
+        <!-- 计算中 -->
+        <section id="calculating" class="page">
+            <div class="calculating-container">
+                <div class="spinner"></div>
+                <h2>Analyzing his behavior patterns...</h2>
+                <p class="calculating-text">We're processing your answers against thousands of relationship data points.</p>
+                
+                <div class="facts">
+                    <p id="factText">Did you know? 68% of people misread romantic signals.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 结果页 -->
+        <section id="result" class="page">
+            <div class="result-container">
+                <div class="score-circle">
+                    <svg viewBox="0 0 100 100">
+                        <circle class="score-bg" cx="50" cy="50" r="45"/>
+                        <circle class="score-progress" id="scoreCircle" cx="50" cy="50" r="45"/>
+                    </svg>
+                    <div class="score-content">
+                        <span class="score-number" id="scoreNumber">0</span>
+                        <span class="score-label">Investment Score</span>
+                    </div>
+                </div>
+                
+                <div class="result-badge" id="resultBadge">
+                    Analyzing...
+                </div>
+                
+                <h2 id="resultTitle"></h2>
+                
+                <p class="result-desc" id="resultDesc"></p>
+                
+                <div class="result-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Emotional Availability</span>
+                        <div class="detail-bar">
+                            <div class="detail-fill" id="bar1"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <span class="detail-label">Time Investment</span>
+                        <div class="detail-bar">
+                            <div class="detail-fill" id="bar2"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <span class="detail-label">Future Planning</span>
+                        <div class="detail-bar">
+                            <div class="detail-fill" id="bar3"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="unlock-section">
+                    <div class="unlock-icon">🔓</div>
+                    <h3>Unlock Your Complete Analysis</h3>
+                    <p>We know relationships are complex. Share a few more details with us, and we'll provide a personalized, in-depth report on your unique situation.</p>
+                    
+                    <div class="unlock-features">
+                        <div class="feature">✓ Detailed personality compatibility</div>
+                        <div class="feature">✓ Red flags &amp; green lights analysis</div>
+                        <div class="feature">✓ Personalized action steps</div>
+                        <div class="feature">✓ 30-day relationship roadmap</div>
+                    </div>
+                    
+                    <button class="btn-unlock" onclick="showUnlock()">
+                        Unlock Full Report
+                        <span class="price">$9.99</span>
+                    </button>
+                    
+                    <p class="guarantee">🛡️ 30-Day Money-Back Guarantee</p>
+                </div>
+                
+                <button class="btn-secondary" onclick="restart()">
+                    Retake Test
+                </button>
+            </div>
+        </section>
+
+        <!-- 解锁页面（演示版） -->
+        <section id="unlock" class="page">
+            <div class="unlock-container">
+                <div class="coming-soon">
+                    <div class="icon">🚧</div>
+                    <h2>Full Analysis Coming Soon</h2>
+                    <p>We're building something special for you. Leave your email to be the first to know when we launch.</p>
+                    
+                    <div class="email-form">
+                        <input type="email" placeholder="Enter your email" id="emailInput">
+                        <button onclick="submitEmail()">Notify Me</button>
+                    </div>
+                    
+                    <button class="btn-secondary" onclick="restart()">Back to Home</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
